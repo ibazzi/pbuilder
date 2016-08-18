@@ -18,26 +18,26 @@ ifeq ($(ARCH), x86_64)
   CROSS_COMPILE :=
 endif
 
-PATH    := $(TOOLCHAIN):$(PATH)
-CC       = $(CROSS_COMPILE)gcc
-STRIP    = $(CROSS_COMPILE)strip
-AR       = $(CROSS_COMPILE)ar
-LD       = $(CROSS_COMPILE)ld
+PATH := $(TOOLCHAIN):$(PATH)
+CC    = $(CROSS_COMPILE)gcc
+STRIP = $(CROSS_COMPILE)strip
+AR    = $(CROSS_COMPILE)ar
+LD    = $(CROSS_COMPILE)ld
 
-SRCDIR				= src.$(ARCH)
-DESTDIR				= @install_dir@/$(ARCH)
-PREFIX				= /usr
-LIBDIR				= $(DESTDIR)$(PREFIX)/lib
-INCLUDEDIR			= $(DESTDIR)$(PREFIX)/include
-BUILDFLAGS			= -I$(INCLUDEDIR) -L$(LIBDIR)
-TARBALLS_LOCATION	= @use_tarballs@
-ARCHIVE_TOOL		= @TAR@
-ARCHIVE_TOOL_FLAGS	= --strip-components=1 -xf
-RETRIEVE_TOOL		= @CURL@
-RETRIEVE_TOOL_FLAGS	= -Ls --create-dirs -f -O
-GIT_TOOL			= @GIT@
-GZIP_TOOL			= @GZIP@
-CMAKE_TOOL			= @CMAKE@
+SRCDIR              = src.$(ARCH)
+DESTDIR             = @install_dir@/$(ARCH)
+PREFIX              = /usr
+LIBDIR              = $(DESTDIR)$(PREFIX)/lib
+INCLUDEDIR          = $(DESTDIR)$(PREFIX)/include
+BUILDFLAGS          = -I$(INCLUDEDIR) -L$(LIBDIR)
+TARBALLS_LOCATION   = @use_tarballs@
+ARCHIVE_TOOL        = @TAR@
+ARCHIVE_TOOL_FLAGS  = --strip-components=1 -xf
+RETRIEVE_TOOL       = @CURL@
+RETRIEVE_TOOL_FLAGS = -Ls --create-dirs -f -O
+GIT_TOOL            = @GIT@
+GZIP_TOOL           = @GZIP@
+CMAKE_TOOL          = @CMAKE@
 
 ifeq ($(JOBS),)
   JOBS := $(shell grep -c ^processor /proc/cpuinfo 2>/dev/null)
@@ -47,7 +47,8 @@ ifeq ($(JOBS),)
 endif
 
 export ARCH TOOLCHAIN CROSS_COMPILE PATH \
-	   CC STRIP AR LD SRCDIR DESTDIR PREFIX \
-	   LIBDIR INCLUDEDIR BUILDFLAGS TARBALLS_LOCATION \
-	   ARCHIVE_TOOL ARCHIVE_TOOL_FLAGS
+       CC STRIP AR LD SRCDIR DESTDIR PREFIX \
+       LIBDIR INCLUDEDIR BUILDFLAGS TARBALLS_LOCATION \
+       ARCHIVE_TOOL ARCHIVE_TOOL_FLAGS RETRIEVE_TOOL \
+       RETRIEVE_TOOL_FLAGS GIT_TOOL GZIP_TOOL CMAKE_TOOL
 
