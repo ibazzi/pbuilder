@@ -1,0 +1,11 @@
+--- src/resolve.c	2011-05-28 23:47:15.000000000 +0800
++++ src/resolve.c	2016-08-18 20:19:24.391216000 +0800
+@@ -23,6 +23,8 @@
+ #include <arpa/inet.h>
+ #include <netinet/in.h>
+ 
++#include <sys/types.h>
++
+ #include <arpa/nameser.h>
+ #ifdef __APPLE__
+ #include <arpa/nameser_compat.h>

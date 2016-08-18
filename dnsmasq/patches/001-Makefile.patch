@@ -1,0 +1,17 @@
+--- Makefile
++++ Makefile
+@@ -18,12 +18,12 @@
+ 
+ # Variables you may well want to override.
+ 
+-PREFIX        = /usr/local
++PREFIX        ?= /usr/local
+ BINDIR        = $(PREFIX)/sbin
+ MANDIR        = $(PREFIX)/share/man
+ LOCALEDIR     = $(PREFIX)/share/locale
+ BUILDDIR      = $(SRC)
+-DESTDIR       = 
++DESTDIR       ?= 
+ CFLAGS        = -Wall -W -O2
+ LDFLAGS       = 
+ COPTS         = 
