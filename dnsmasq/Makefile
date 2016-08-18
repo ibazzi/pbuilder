@@ -4,7 +4,7 @@ DEPS= ../Makefile.include Makefile
 PACKAGE	= dnsmasq
 VERSION	= master
 ARCHIVE = $(PACKAGE).tar.gz
-URL	= git://thekelleys.org.uk/$(PACKAGE).git
+URL	    = git://thekelleys.org.uk/$(PACKAGE).git
 
 TARGET=$(SRCDIR)/src/dnsmasq
 
@@ -36,6 +36,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 

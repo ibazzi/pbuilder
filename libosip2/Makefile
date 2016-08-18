@@ -1,16 +1,15 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= libosip2
-VERSION	= 4.1.0
-SOURCE	= $(PACKAGE)-$(VERSION)
-ARCHIVE	= $(SOURCE).tar.gz
-URL		= http://ftp.gnu.org/gnu/osip/$(ARCHIVE)
+PACKAGE = libosip2
+VERSION = 4.1.0
+SOURCE  = $(PACKAGE)-$(VERSION)
+ARCHIVE = $(SOURCE).tar.gz
+URL     = http://ftp.gnu.org/gnu/osip/$(ARCHIVE)
 
-PREFIX := $(DESTDIR)$(PREFIX)
-DESTDIR=
-
-CONFIGURE= ./configure --prefix=$(PREFIX) --host=$(ARCH)-linux --enable-shared
+PREFIX    := $(DESTDIR)$(PREFIX)
+DESTDIR   =
+CONFIGURE = ./configure --prefix=$(PREFIX) --host=$(ARCH)-linux --enable-shared
 
 TARGET=$(SRCDIR)/src/osipparser2/.libs/libosipparser2.a
 
@@ -37,6 +36,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 

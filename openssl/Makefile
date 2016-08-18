@@ -1,11 +1,11 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= openssl
-VERSION	= 1.0.2h
-SOURCE	= $(PACKAGE)-$(VERSION)
-ARCHIVE	= $(SOURCE).tar.gz
-URL		= https://www.openssl.org/source/$(ARCHIVE)
+PACKAGE = openssl
+VERSION = 1.0.2h
+SOURCE  = $(PACKAGE)-$(VERSION)
+ARCHIVE = $(SOURCE).tar.gz
+URL     = https://www.openssl.org/source/$(ARCHIVE)
 
 ifeq ($(ARCH),arm)
 export OPENSSL_TARGET := linux-armv4
@@ -55,6 +55,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 

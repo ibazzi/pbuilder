@@ -1,10 +1,10 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= n2n
-VERSION	= master
+PACKAGE = n2n
+VERSION = master
 ARCHIVE = $(PACKAGE).tar.gz
-URL	= git@github.com:ibazzi/$(PACKAGE).git
+URL     = git@github.com:ibazzi/$(PACKAGE).git
 
 BUILDDIR  = build
 CONFIGURE = $(CMAKE_TOOL) -DCMAKE_INSTALL_PREFIX=$(PREFIX) -DCMAKE_TOOLCHAIN_FILE=../n2n_v2/cmake/CMakeToolchainFile.$(ARCH).cmake ../n2n_v2/
@@ -41,6 +41,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 

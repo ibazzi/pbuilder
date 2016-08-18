@@ -1,11 +1,11 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= zlib
-VERSION	= 1.2.8
-SOURCE	= $(PACKAGE)-$(VERSION)
-ARCHIVE	= $(SOURCE).tar.gz
-URL		= http://zlib.net/$(ARCHIVE)
+PACKAGE = zlib
+VERSION = 1.2.8
+SOURCE  = $(PACKAGE)-$(VERSION)
+ARCHIVE = $(SOURCE).tar.gz
+URL     = http://zlib.net/$(ARCHIVE)
 
 # configuration settings
 CONFIGURE = ./configure --prefix=$(PREFIX)
@@ -35,5 +35,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
+

@@ -1,11 +1,11 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= ncurses
-VERSION	= 6.0-20160813
-SOURCE	= $(PACKAGE)-$(VERSION)
-ARCHIVE	= $(SOURCE).tgz
-URL		= http://invisible-mirror.net/archives/ncurses/current/$(ARCHIVE)
+PACKAGE = ncurses
+VERSION = 6.0-20160813
+SOURCE  = $(PACKAGE)-$(VERSION)
+ARCHIVE = $(SOURCE).tgz
+URL     = http://invisible-mirror.net/archives/ncurses/current/$(ARCHIVE)
 
 CONFIGURE = ./configure --host=$(ARCH)-linux --without-progs --without-tests --with-default-terminfo-dir=/etc/terminfo
 
@@ -34,7 +34,7 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 	
 	

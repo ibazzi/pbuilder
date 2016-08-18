@@ -1,11 +1,11 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= nano
-VERSION	= 2.6.3
-SOURCE	= $(PACKAGE)-$(VERSION)
-ARCHIVE	= $(SOURCE).tar.gz
-URL		= https://www.nano-editor.org/dist/v2.6/$(ARCHIVE)
+PACKAGE = nano
+VERSION = 2.6.3
+SOURCE  = $(PACKAGE)-$(VERSION)
+ARCHIVE = $(SOURCE).tar.gz
+URL     = https://www.nano-editor.org/dist/v2.6/$(ARCHIVE)
 
 CONFIGURE = ./configure --prefix=$(PREFIX) --host=$(ARCH)-linux CFLAGS=-I$(INCLUDEDIR) LDFLAGS=-L$(LIBDIR)
 
@@ -35,6 +35,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 

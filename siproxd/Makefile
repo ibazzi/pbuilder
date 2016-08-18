@@ -1,11 +1,11 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= siproxd
-VERSION	= 0.8.2dev
-SOURCE	= $(PACKAGE)-$(VERSION)
-ARCHIVE	= $(SOURCE).tar.gz
-URL		= http://siproxd.tuxworld.ch/$(ARCHIVE)
+PACKAGE = siproxd
+VERSION = 0.8.2dev
+SOURCE  = $(PACKAGE)-$(VERSION)
+ARCHIVE = $(SOURCE).tar.gz
+URL     = http://siproxd.tuxworld.ch/$(ARCHIVE)
 
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(ARCH)-linux CFLAGS=-I$(INCLUDEDIR) LDFLAGS=-L$(LIBDIR)
 
@@ -35,6 +35,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 

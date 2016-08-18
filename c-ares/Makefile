@@ -1,11 +1,11 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= c-ares
-VERSION	= 1.11.0
-SOURCE	= $(PACKAGE)-$(VERSION)
-ARCHIVE	= $(SOURCE).tar.gz
-URL		= https://c-ares.haxx.se/download/$(ARCHIVE)
+PACKAGE = c-ares
+VERSION = 1.11.0
+SOURCE  = $(PACKAGE)-$(VERSION)
+ARCHIVE = $(SOURCE).tar.gz
+URL     = https://c-ares.haxx.se/download/$(ARCHIVE)
 
 CONFIGURE = ./configure --prefix=$(PREFIX) --host=$(ARCH)-linux --disable-shared
 
@@ -34,5 +34,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
+

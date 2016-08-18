@@ -1,10 +1,10 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE	= opennhrp
-VERSION	= master
+PACKAGE = opennhrp
+VERSION = master
 ARCHIVE = $(PACKAGE).tar.gz
-URL	= git@github.com:ibazzi/$(PACKAGE).git
+URL     = git@github.com:ibazzi/$(PACKAGE).git
 
 TARGET=$(SRCDIR)/nhrp/opennhrp
 
@@ -36,6 +36,6 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 	rm -f .installed_$(ARCH)
 	
-distclean::
+distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 
