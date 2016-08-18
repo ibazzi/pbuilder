@@ -17,8 +17,6 @@ n2n: openssl
 $(PACKAGES):
 	$(MAKE) -C $@
 
-.PHONY: all $(PACKAGES)
-
 clean:
 	for d in $(PACKAGES); do $(MAKE) -C $$d clean; done
 	
@@ -28,5 +26,5 @@ distclean:
 clear-install-dir:
 	rm -rf $(DESTDIR)
 
-.PHONY: clear-install-dir
+.PHONY: $(PACKAGES)
 
