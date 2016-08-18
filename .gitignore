@@ -1,0 +1,6 @@
+autom4te.cache
+config.*
+configure
+Makefile.include
+src.*
+.installed_*
