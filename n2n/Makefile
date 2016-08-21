@@ -7,7 +7,11 @@ ARCHIVE = $(PACKAGE).tar.gz
 URL     = git@github.com:ibazzi/$(PACKAGE).git
 
 BUILDDIR  = build
-CONFIGURE = $(CMAKE_TOOL) -DCMAKE_INSTALL_PREFIX=$(PREFIX) -DCMAKE_TOOLCHAIN_FILE=../n2n_v2/cmake/CMakeToolchainFile.$(ARCH).cmake ../n2n_v2/
+ifneq ($(ARCH),x86_64)
+CMAKE_TOOLCHAIN_FILE = -DCMAKE_TOOLCHAIN_FILE=../n2n_v2/cmake/CMakeToolchainFile.$(ARCH).cmake
+endif
+N2N_OPTIONS = -DN2N_OPTION_COMPRESSION=OFF -DN2N_OPTION_AES=OFF -DCMAKE_BUILD_TYPE=Release
+CONFIGURE =  $(CMAKE_TOOL) $(N2N_OPTIONS) -DCMAKE_INSTALL_PREFIX=$(PREFIX) $(CMAKE_TOOLCHAIN_FILE) ../n2n_v2/
 
 TARGET=$(SRCDIR)/$(BUILDDIR)/edge
 
@@ -38,9 +42,9 @@ $(TARGET): $(SRCDIR)
 	touch $@
 
 clean:
-	$(MAKE) -C $(SRCDIR) clean
+	$(MAKE) -C $(SRCDIR)/$(BUILDDIR) clean
 	rm -f .installed_$(ARCH)
-	
+
 distclean:
 	rm -rf $(SRCDIR) .installed_$(ARCH)
 

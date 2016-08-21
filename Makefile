@@ -12,7 +12,6 @@ openssl: zlib
 opennhrp: c-ares
 nano: ncurses
 siproxd: libosip2
-n2n: openssl
 
 $(PACKAGES):
 	$(MAKE) -C $@
