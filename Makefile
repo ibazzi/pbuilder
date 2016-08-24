@@ -4,7 +4,8 @@ PACKAGES = \
 	zlib openssl c-ares \
 	opennhrp dnsmasq n2n \
 	ncurses nano siproxd \
-	libosip2 iproute2
+	libosip2 iproute2 \
+	ipset libmnl
 
 all: $(PACKAGES)
 
@@ -12,6 +13,7 @@ openssl: zlib
 opennhrp: c-ares
 nano: ncurses
 siproxd: libosip2
+ipset: libmnl
 
 $(PACKAGES):
 	$(MAKE) -C $@
