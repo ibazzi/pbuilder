@@ -25,8 +25,13 @@ AC_ARG_WITH([install-dir],
 
 AC_ARG_WITH([tarballs],
   [AS_HELP_STRING([--with-tarballs=],
-  [path where tarballs will be saved [prefix/xbmc-tarballs]])],
+  [path where tarballs will be saved.])],
   [use_tarballs=$withval])
+
+AC_ARG_WITH([kernel],
+  [AS_HELP_STRING([--with-kernel=],
+  [specify path to kernel source.])],
+  [kernel_path=$withval])
 
 AC_PATH_PROG(TAR,tar,"no")
 if test "x$TAR" = "xno" ; then
@@ -58,6 +63,7 @@ AC_SUBST(mips_toolchain)
 AC_SUBST(mipsel_toolchain)
 AC_SUBST(install_dir)
 AC_SUBST(use_tarballs)
+AC_SUBST(kernel_path)
 AC_SUBST(TAR)
 AC_SUBST(GIT)
 AC_SUBST(CURL)

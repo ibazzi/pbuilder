@@ -31,6 +31,7 @@ LIBDIR              = $(DESTDIR)$(PREFIX)/lib
 INCLUDEDIR          = $(DESTDIR)$(PREFIX)/include
 BUILDFLAGS          = -I$(INCLUDEDIR) -L$(LIBDIR)
 TARBALLS_LOCATION   = @use_tarballs@
+KERNEL_LOCATION     = @kernel_path@
 ARCHIVE_TOOL        = @TAR@
 ARCHIVE_TOOL_FLAGS  = --strip-components=1 -xf
 RETRIEVE_TOOL       = @CURL@
