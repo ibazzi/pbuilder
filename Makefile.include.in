@@ -29,7 +29,6 @@ DESTDIR             = @install_dir@/$(ARCH)
 PREFIX              = /usr
 LIBDIR              = $(DESTDIR)$(PREFIX)/lib
 INCLUDEDIR          = $(DESTDIR)$(PREFIX)/include
-BUILDFLAGS          = -I$(INCLUDEDIR) -L$(LIBDIR)
 TARBALLS_LOCATION   = @use_tarballs@
 KERNEL_LOCATION     = @kernel_path@
 ARCHIVE_TOOL        = @TAR@
@@ -41,6 +40,7 @@ GZIP_TOOL           = @GZIP@
 CMAKE_TOOL          = @CMAKE@
 CFLAGS              = -DNEED_PRINTF -I$(INCLUDEDIR)
 LDFLAGS             = -L$(LIBDIR)
+BUILDFLAGS          = $(CFLAGS) $(LDFLAGS)
 
 ifeq ($(JOBS),)
   JOBS := $(shell grep -c ^processor /proc/cpuinfo 2>/dev/null)
