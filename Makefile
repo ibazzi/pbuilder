@@ -20,10 +20,10 @@ $(PACKAGES):
 
 clean:
 	for d in $(PACKAGES); do $(MAKE) -C $$d clean; done
-	
-distclean:
+
+distclean: clear-install-dir
 	for d in $(PACKAGES); do $(MAKE) -C $$d distclean; done
-	
+
 clear-install-dir:
 	rm -rf $(DESTDIR)
 
