@@ -10,7 +10,8 @@ $ ./configure --with-arm-toolchain=/home/user/dev/toolchains/toolchain-arm_corte
               --with-mips-toolchain=/home/user/dev/toolchains/toolchain-mips_34kc_gcc-6.1.0_musl-1.1.15/bin \
               --with-mipsel-toolchain=/home/user/dev/toolchains/toolchain-mipsel_74kc+dsp2_gcc-6.1.0_musl-1.1.15/bin \
               --with-install-dir=/home/user/dev/build \
-              --with-tarballs=/home/user/dev/tmp
+              --with-tarballs=/home/user/dev/tmp \
+              --with-kernel=/home/user/dev/linux-kernel
 # build all packages
 $ ARCH=arm make
 # for single package
