@@ -3,7 +3,7 @@ DEPS= ../Makefile.include Makefile
 
 PACKAGE = n2n
 VERSION = master
-ARCHIVE = $(PACKAGE).tar.gz
+ARCHIVE = $(PACKAGE)-$(VERSION).tar.gz
 URL     = git@github.com:ibazzi/$(PACKAGE).git
 
 BUILDDIR  = build

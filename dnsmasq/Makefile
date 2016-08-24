@@ -3,7 +3,7 @@ DEPS= ../Makefile.include Makefile
 
 PACKAGE	= dnsmasq
 VERSION	= master
-ARCHIVE = $(PACKAGE).tar.gz
+ARCHIVE = $(PACKAGE)-$(VERSION).tar.gz
 URL	    = git://thekelleys.org.uk/$(PACKAGE).git
 
 TARGET=$(SRCDIR)/src/dnsmasq

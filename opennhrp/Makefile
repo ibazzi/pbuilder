@@ -3,7 +3,7 @@ DEPS= ../Makefile.include Makefile
 
 PACKAGE = opennhrp
 VERSION = master
-ARCHIVE = $(PACKAGE).tar.gz
+ARCHIVE = $(PACKAGE)-$(VERSION).tar.gz
 URL     = git@github.com:ibazzi/$(PACKAGE).git
 
 TARGET=$(SRCDIR)/nhrp/opennhrp
