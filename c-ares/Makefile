@@ -7,6 +7,8 @@ SOURCE  = $(PACKAGE)-$(VERSION)
 ARCHIVE = $(SOURCE).tar.gz
 URL     = https://c-ares.haxx.se/download/$(ARCHIVE)
 
+CFLAGS  =
+LDFLAGS =
 CONFIGURE = ./configure --prefix=$(PREFIX) --host=$(ARCH)-linux --disable-shared
 
 TARGET=$(SRCDIR)/.libs/libcares.a
