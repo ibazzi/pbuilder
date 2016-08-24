@@ -1,18 +1,20 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE = libmnl
-VERSION = 1.0.4
+PACKAGE = iptables
+VERSION = 1.6.0
 SOURCE  = $(PACKAGE)-$(VERSION)
 ARCHIVE = $(SOURCE).tar.bz2
-URL     = http://www.netfilter.org/projects/libmnl/files/$(ARCHIVE)
+URL     = http://www.netfilter.org/projects/iptables/files/$(ARCHIVE)
 
 PREFIX:=$(DESTDIR)/usr
 DESTDIR:=
 
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(ARCH)-linux
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(ARCH)-linux \
+			--enable-static --disable-nftables \
+			LDFLAGS="$(LDFLAGS) -lmnl -lnftnl"
 
-TARGET=$(SRCDIR)/src/.libs/libmnl.so.0.2.0
+TARGET=$(SRCDIR)/iptables/.libs/xtables-multi
 
 all: .installed_$(ARCH)
 
@@ -21,12 +23,13 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 
 $(SRCDIR): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(SRCDIR); mkdir -p $(SRCDIR)
-	cd $(SRCDIR) && \
-	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE) && \
+	cd $(SRCDIR); \
+	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE); \
 	$(CONFIGURE)
 
 $(TARGET): $(SRCDIR) $(DEPS)
 	$(MAKE) -C $(SRCDIR) -j$(JOBS)
+	$(STRIP) $(TARGET)
 
 .installed_$(ARCH): $(TARGET)
 	$(MAKE) -C $(SRCDIR) install

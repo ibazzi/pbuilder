@@ -1,18 +1,19 @@
 include ../Makefile.include
 DEPS= ../Makefile.include Makefile
 
-PACKAGE = libmnl
-VERSION = 1.0.4
+PACKAGE = libnftnl
+VERSION = 1.0.6
 SOURCE  = $(PACKAGE)-$(VERSION)
 ARCHIVE = $(SOURCE).tar.bz2
-URL     = http://www.netfilter.org/projects/libmnl/files/$(ARCHIVE)
+URL     = http://www.netfilter.org/projects/libnftnl/files/$(ARCHIVE)
 
 PREFIX:=$(DESTDIR)/usr
 DESTDIR:=
 
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(ARCH)-linux
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(ARCH)-linux \
+			LIBMNL_CFLAGS=-I$(INCLUDEDIR) LIBMNL_LIBS="-L$(LIBDIR) -lmnl"
 
-TARGET=$(SRCDIR)/src/.libs/libmnl.so.0.2.0
+TARGET=$(SRCDIR)/src/.libs/libnftnl.so.4.1.0
 
 all: .installed_$(ARCH)
 
