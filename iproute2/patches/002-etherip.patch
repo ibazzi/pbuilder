@@ -1,0 +1,63 @@
+--- include/utils.h	2016-08-08 23:58:39.000000000 +0800
++++ include/utils.h	2016-08-24 11:29:20.646449391 +0800
+@@ -33,6 +33,9 @@
+ #ifndef IPPROTO_AH
+ #define IPPROTO_AH	51
+ #endif
++#ifndef IPPROTO_ETHERIP
++#define IPPROTO_ETHERIP	97
++#endif
+ #ifndef IPPROTO_COMP
+ #define IPPROTO_COMP	108
+ #endif
+--- ip/iptunnel.c	2016-08-08 23:58:39.000000000 +0800
++++ ip/iptunnel.c	2016-08-24 11:29:27.710449206 +0800
+@@ -33,7 +33,7 @@
+ static void usage(void)
+ {
+ 	fprintf(stderr, "Usage: ip tunnel { add | change | del | show | prl | 6rd } [ NAME ]\n");
+-	fprintf(stderr, "          [ mode { ipip | gre | sit | isatap | vti } ] [ remote ADDR ] [ local ADDR ]\n");
++	fprintf(stderr, "          [ mode { ipip | gre | sit  | etherip | isatap | vti } ] [ remote ADDR ] [ local ADDR ]\n");
+ 	fprintf(stderr, "          [ [i|o]seq ] [ [i|o]key KEY ] [ [i|o]csum ]\n");
+ 	fprintf(stderr, "          [ prl-default ADDR ] [ prl-nodefault ADDR ] [ prl-delete ADDR ]\n");
+ 	fprintf(stderr, "          [ 6rd-prefix ADDR ] [ 6rd-relay_prefix ADDR ] [ 6rd-reset ]\n");
+@@ -83,6 +83,13 @@
+ 			} else if (strcmp(*argv, "sit") == 0 ||
+ 				   strcmp(*argv, "ipv6/ip") == 0) {
+ 				set_tunnel_proto(p, IPPROTO_IPV6);
++			} else if (strcmp(*argv, "etherip") == 0 ||
++				   strcmp(*argv, "ether/ip") == 0) {
++				if (p->iph.protocol && p->iph.protocol != IPPROTO_ETHERIP) {
++					fprintf(stderr,"You managed to ask for more than one tunnel mode.\n");
++					exit(-1);
++				}
++				p->iph.protocol = IPPROTO_ETHERIP;
+ 			} else if (strcmp(*argv, "isatap") == 0) {
+ 				set_tunnel_proto(p, IPPROTO_IPV6);
+ 				isatap++;
+@@ -199,6 +206,8 @@
+ 			p->iph.protocol = IPPROTO_IPIP;
+ 		else if (memcmp(p->name, "sit", 3) == 0)
+ 			p->iph.protocol = IPPROTO_IPV6;
++ 		else if (memcmp(p->name, "etherip", 7) == 0)
++ 			p->iph.protocol = IPPROTO_ETHERIP;
+ 		else if (memcmp(p->name, "isatap", 6) == 0) {
+ 			p->iph.protocol = IPPROTO_IPV6;
+ 			isatap++;
+@@ -254,6 +263,8 @@
+ 		return "gre0";
+ 	case IPPROTO_IPV6:
+ 		return "sit0";
++ 	case IPPROTO_ETHERIP:
++ 		return "etherip0";
+ 	}
+ 	return NULL;
+ }
+@@ -274,7 +285,7 @@
+ 	basedev = tnl_defname(&p);
+ 	if (!basedev) {
+ 		fprintf(stderr,
+-			"cannot determine tunnel mode (ipip, gre, vti or sit)\n");
++			"cannot determine tunnel mode (ipip, gre, etherip, vti or sit)\n");
+ 		return -1;
+ 	}

@@ -4,7 +4,7 @@ PACKAGES = \
 	zlib openssl c-ares \
 	opennhrp dnsmasq n2n \
 	ncurses nano siproxd \
-	libosip2
+	libosip2 iproute2
 
 all: $(PACKAGES)
 

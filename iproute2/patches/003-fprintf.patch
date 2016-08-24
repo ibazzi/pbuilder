@@ -1,0 +1,223 @@
+diff -Naur ip/ip6tunnel.c ip/ip6tunnel.c
+--- ip/ip6tunnel.c	2016-08-24 11:37:58.530435000 +0800
++++ ip/ip6tunnel.c	2016-08-24 11:38:17.546435317 +0800
+@@ -74,7 +74,7 @@
+ 	/* Do not use format_host() for local addr,
+ 	 * symbolic name will not be useful.
+ 	 */
+-	printf("%s: %s/ipv6 remote %s local %s",
++	fprintf(stderr, "%s: %s/ipv6 remote %s local %s",
+ 	       p->name,
+ 	       tnl_strproto(p->proto),
+ 	       format_host_r(AF_INET6, 16, &p->raddr, s1, sizeof(s1)),
+@@ -83,52 +83,52 @@
+ 		const char *n = ll_index_to_name(p->link);
+ 
+ 		if (n)
+-			printf(" dev %s", n);
++			fprintf(stderr, " dev %s", n);
+ 	}
+ 
+ 	if (p->flags & IP6_TNL_F_IGN_ENCAP_LIMIT)
+-		printf(" encaplimit none");
++		fprintf(stderr, " encaplimit none");
+ 	else
+-		printf(" encaplimit %u", p->encap_limit);
++		fprintf(stderr, " encaplimit %u", p->encap_limit);
+ 
+-	printf(" hoplimit %u", p->hop_limit);
++	fprintf(stderr, " hoplimit %u", p->hop_limit);
+ 
+ 	if (p->flags & IP6_TNL_F_USE_ORIG_TCLASS)
+-		printf(" tclass inherit");
++		fprintf(stderr, " tclass inherit");
+ 	else {
+ 		__u32 val = ntohl(p->flowinfo & IP6_FLOWINFO_TCLASS);
+ 
+-		printf(" tclass 0x%02x", (__u8)(val >> 20));
++		fprintf(stderr, " tclass 0x%02x", (__u8)(val >> 20));
+ 	}
+ 
+ 	if (p->flags & IP6_TNL_F_USE_ORIG_FLOWLABEL)
+-		printf(" flowlabel inherit");
++		fprintf(stderr, " flowlabel inherit");
+ 	else
+-		printf(" flowlabel 0x%05x", ntohl(p->flowinfo & IP6_FLOWINFO_FLOWLABEL));
++		fprintf(stderr, " flowlabel 0x%05x", ntohl(p->flowinfo & IP6_FLOWINFO_FLOWLABEL));
+ 
+-	printf(" (flowinfo 0x%08x)", ntohl(p->flowinfo));
++	fprintf(stderr, " (flowinfo 0x%08x)", ntohl(p->flowinfo));
+ 
+ 	if (p->flags & IP6_TNL_F_RCV_DSCP_COPY)
+-		printf(" dscp inherit");
++		fprintf(stderr, " dscp inherit");
+ 
+ 	if (p->proto == IPPROTO_GRE) {
+ 		if ((p->i_flags & GRE_KEY) && (p->o_flags & GRE_KEY) && p->o_key == p->i_key)
+-			printf(" key %u", ntohl(p->i_key));
++			fprintf(stderr, " key %u", ntohl(p->i_key));
+ 		else if ((p->i_flags | p->o_flags) & GRE_KEY) {
+ 			if (p->i_flags & GRE_KEY)
+-				printf(" ikey %u", ntohl(p->i_key));
++				fprintf(stderr, " ikey %u", ntohl(p->i_key));
+ 			if (p->o_flags & GRE_KEY)
+-				printf(" okey %u", ntohl(p->o_key));
++				fprintf(stderr, " okey %u", ntohl(p->o_key));
+ 		}
+ 
+ 		if (p->i_flags & GRE_SEQ)
+-			printf("%s  Drop packets out of sequence.", _SL_);
++			fprintf(stderr, "%s  Drop packets out of sequence.", _SL_);
+ 		if (p->i_flags & GRE_CSUM)
+-			printf("%s  Checksum in received packet is required.", _SL_);
++			fprintf(stderr, "%s  Checksum in received packet is required.", _SL_);
+ 		if (p->o_flags & GRE_SEQ)
+-			printf("%s  Sequence packets on output.", _SL_);
++			fprintf(stderr, "%s  Sequence packets on output.", _SL_);
+ 		if (p->o_flags & GRE_CSUM)
+-			printf("%s  Checksum output packets.", _SL_);
++			fprintf(stderr, "%s  Checksum output packets.", _SL_);
+ 	}
+ }
+ 
+@@ -383,7 +383,7 @@
+ 		print_tunnel(&p1);
+ 		if (show_stats)
+ 			tnl_print_stats(ptr);
+-		printf("\n");
++		fprintf(stderr, "\n");
+ 	}
+ 	err = 0;
+  end:
+@@ -408,7 +408,7 @@
+ 		if (tnl_get_ioctl(p.name, &p))
+ 			return -1;
+ 		print_tunnel(&p);
+-		printf("\n");
++		fprintf(stderr, "\n");
+ 	}
+ 
+ 	return 0;
+diff -Naur ip/ip.c ip/ip.c
+--- ip/ip.c	2016-08-08 23:58:39.000000000 +0800
++++ ip/ip.c	2016-08-24 11:38:40.590434713 +0800
+@@ -242,7 +242,7 @@
+ 			rtnl_names_numeric++;
+ #endif
+ 		} else if (matches(opt, "-Version") == 0) {
+-			printf("ip utility, iproute2-ss%s\n", SNAPSHOT);
++			fprintf(stderr, "ip utility, iproute2-ss%s\n", SNAPSHOT);
+ 			exit(0);
+ 		} else if (matches(opt, "-force") == 0) {
+ 			++force;
+diff -Naur ip/iptunnel.c ip/iptunnel.c
+--- ip/iptunnel.c	2016-08-24 11:32:07.314445000 +0800
++++ ip/iptunnel.c	2016-08-24 11:38:22.082435198 +0800
+@@ -311,7 +311,7 @@
+ 	/* Do not use format_host() for local addr,
+ 	 * symbolic name will not be useful.
+ 	 */
+-	printf("%s: %s/ip remote %s local %s",
++	fprintf(stderr, "%s: %s/ip remote %s local %s",
+ 	       p->name,
+ 	       tnl_strproto(p->iph.protocol),
+ 	       p->iph.daddr ? format_host_r(AF_INET, 4, &p->iph.daddr, s1, sizeof(s1)) : "any",
+@@ -327,7 +327,7 @@
+ 		if (!tnl_prl_ioctl(SIOCGETPRL, p->name, prl))
+ 			for (i = 1; i < ARRAY_SIZE(prl); i++) {
+ 				if (prl[i].addr != htonl(INADDR_ANY)) {
+-					printf(" %s %s ",
++					fprintf(stderr, " %s %s ",
+ 					       (prl[i].flags & PRL_DEFAULT) ? "pdr" : "pr",
+ 					       format_host(AF_INET, 4, &prl[i].addr));
+ 				}
+@@ -338,55 +338,55 @@
+ 		const char *n = ll_index_to_name(p->link);
+ 
+ 		if (n)
+-			printf(" dev %s", n);
++			fprintf(stderr, " dev %s", n);
+ 	}
+ 
+ 	if (p->iph.ttl)
+-		printf(" ttl %d", p->iph.ttl);
++		fprintf(stderr, " ttl %d", p->iph.ttl);
+ 	else
+-		printf(" ttl inherit");
++		fprintf(stderr, " ttl inherit");
+ 
+ 	if (p->iph.tos) {
+ 		SPRINT_BUF(b1);
+-		printf(" tos");
++		fprintf(stderr, " tos");
+ 		if (p->iph.tos & 1)
+-			printf(" inherit");
++			fprintf(stderr, " inherit");
+ 		if (p->iph.tos & ~1)
+-			printf("%c%s ", p->iph.tos & 1 ? '/' : ' ',
++			fprintf(stderr, "%c%s ", p->iph.tos & 1 ? '/' : ' ',
+ 			       rtnl_dsfield_n2a(p->iph.tos & ~1, b1, sizeof(b1)));
+ 	}
+ 
+ 	if (!(p->iph.frag_off & htons(IP_DF)))
+-		printf(" nopmtudisc");
++		fprintf(stderr, " nopmtudisc");
+ 
+ 	if (p->iph.protocol == IPPROTO_IPV6 && !tnl_ioctl_get_6rd(p->name, &ip6rd) && ip6rd.prefixlen) {
+-		printf(" 6rd-prefix %s/%u",
++		fprintf(stderr, " 6rd-prefix %s/%u",
+ 		       inet_ntop(AF_INET6, &ip6rd.prefix, s1, sizeof(s1)),
+ 		       ip6rd.prefixlen);
+ 		if (ip6rd.relay_prefix) {
+-			printf(" 6rd-relay_prefix %s/%u",
++			fprintf(stderr, " 6rd-relay_prefix %s/%u",
+ 			       format_host(AF_INET, 4, &ip6rd.relay_prefix),
+ 			       ip6rd.relay_prefixlen);
+ 		}
+ 	}
+ 
+ 	if ((p->i_flags & GRE_KEY) && (p->o_flags & GRE_KEY) && p->o_key == p->i_key)
+-		printf(" key %u", ntohl(p->i_key));
++		fprintf(stderr, " key %u", ntohl(p->i_key));
+ 	else if ((p->i_flags | p->o_flags) & GRE_KEY) {
+ 		if (p->i_flags & GRE_KEY)
+-			printf(" ikey %u", ntohl(p->i_key));
++			fprintf(stderr, " ikey %u", ntohl(p->i_key));
+ 		if (p->o_flags & GRE_KEY)
+-			printf(" okey %u", ntohl(p->o_key));
++			fprintf(stderr, " okey %u", ntohl(p->o_key));
+ 	}
+ 
+ 	if (p->i_flags & GRE_SEQ)
+-		printf("%s  Drop packets out of sequence.", _SL_);
++		fprintf(stderr, "%s  Drop packets out of sequence.", _SL_);
+ 	if (p->i_flags & GRE_CSUM)
+-		printf("%s  Checksum in received packet is required.", _SL_);
++		fprintf(stderr, "%s  Checksum in received packet is required.", _SL_);
+ 	if (p->o_flags & GRE_SEQ)
+-		printf("%s  Sequence packets on output.", _SL_);
++		fprintf(stderr, "%s  Sequence packets on output.", _SL_);
+ 	if (p->o_flags & GRE_CSUM)
+-		printf("%s  Checksum output packets.", _SL_);
++		fprintf(stderr, "%s  Checksum output packets.", _SL_);
+ }
+ 
+ static int do_tunnels_list(struct ip_tunnel_parm *p)
+@@ -443,7 +443,7 @@
+ 		print_tunnel(&p1);
+ 		if (show_stats)
+ 			tnl_print_stats(ptr);
+-		printf("\n");
++		fprintf(stderr, "\n");
+ 	}
+ 	err = 0;
+  end:
+@@ -468,7 +468,7 @@
+ 		return -1;
+ 
+ 	print_tunnel(&p);
+-	printf("\n");
++	fprintf(stderr, "\n");
+ 	return 0;
+ }
+ 
