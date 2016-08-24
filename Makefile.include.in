@@ -39,6 +39,8 @@ RETRIEVE_TOOL_FLAGS = -Ls --create-dirs -f -O
 GIT_TOOL            = @GIT@
 GZIP_TOOL           = @GZIP@
 CMAKE_TOOL          = @CMAKE@
+CFLAGS              = -DNEED_PRINTF -I$(INCLUDEDIR)
+LDFLAGS             = -L$(LIBDIR)
 
 ifeq ($(JOBS),)
   JOBS := $(shell grep -c ^processor /proc/cpuinfo 2>/dev/null)
@@ -47,7 +49,7 @@ ifeq ($(JOBS),)
   endif
 endif
 
-export ARCH TOOLCHAIN CROSS_COMPILE PATH \
+export ARCH TOOLCHAIN CROSS_COMPILE PATH CFLAGS LDFLAGS \
        CC STRIP AR LD SRCDIR DESTDIR PREFIX \
        LIBDIR INCLUDEDIR BUILDFLAGS TARBALLS_LOCATION \
        ARCHIVE_TOOL ARCHIVE_TOOL_FLAGS RETRIEVE_TOOL \
