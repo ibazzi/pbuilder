@@ -18,13 +18,16 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 
 $(SRCDIR): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(SRCDIR); mkdir -p $(SRCDIR)
-	cd $(SRCDIR) && \
-	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE) && \
-	patch -p0 < ../patches/001-types.patch && \
+	cd $(SRCDIR); \
+	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE); \
+	for file in `ls ../patches/*.patch`; do \
+	(patch -p0 < $$file) \
+	done; \
 	$(CONFIGURE)
 
 $(TARGET): $(SRCDIR) $(DEPS)
 	$(MAKE) -C $(SRCDIR) -j$(JOBS)
+	$(STRIP) $(TARGET)
 
 .installed_$(ARCH): $(TARGET)
 	$(MAKE) -C $(SRCDIR) install
