@@ -6,7 +6,7 @@ PACKAGES = \
 	ncurses nano siproxd \
 	libosip2 iproute2 \
 	ipset libmnl libnftnl \
-	iptables
+	iptables libiconv
 
 all: $(PACKAGES)
 
