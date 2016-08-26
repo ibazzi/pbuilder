@@ -6,7 +6,8 @@ PACKAGES = \
 	ncurses nano siproxd \
 	libosip2 iproute2 \
 	ipset libmnl libnftnl \
-	iptables libiconv
+	iptables libiconv \
+	dvb-apps tvheadend
 
 all: $(PACKAGES)
 
@@ -18,6 +19,7 @@ libmnl: kernel-headers-install
 ipset: libmnl
 libnftnl: libmnl
 iptables: libnftnl
+tvheadend: libiconv dvb-apps
 
 $(PACKAGES):
 	$(MAKE) -C $@
