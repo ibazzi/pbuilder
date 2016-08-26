@@ -19,7 +19,8 @@ libmnl: kernel-headers-install
 ipset: libmnl
 libnftnl: libmnl
 iptables: libnftnl
-tvheadend: libiconv dvb-apps
+dvb-apps: kernel-headers-install
+tvheadend: openssl libiconv dvb-apps
 
 $(PACKAGES):
 	$(MAKE) -C $@
