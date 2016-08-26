@@ -32,6 +32,12 @@ kernel-headers-install:
 clear-install-dir:
 	rm -rf $(DESTDIR)
 
+clean-all:
+	for d in $(PACKAGES); do \
+	rm -rf $$d/src.*; \
+	rm -rf $$d/.installed_*; \
+	done
+
 clean:
 	for d in $(PACKAGES); do $(MAKE) -C $$d clean; done
 
