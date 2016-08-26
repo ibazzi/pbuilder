@@ -21,6 +21,9 @@ ifeq ($(ARCH),mipsel)
 export OPENSSL_TARGET := linux-mips32
 export OPENSSL_CMAKEFLAGS := -ffunction-sections -fdata-sections -Wl,--gc-sections -DOPENSSL_SMALL_FOOTPRINT
 endif
+ifeq ($(ARCH),x86_64)
+export OPENSSL_TARGET := linux-x86_64
+endif
 CC = gcc
 
 CONFIGURE = ./Configure $(OPENSSL_TARGET) --prefix=$(DESTDIR)$(PREFIX) --openssldir=$(DESTDIR)/etc/ssl \
