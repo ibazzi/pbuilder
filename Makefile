@@ -7,7 +7,7 @@ PACKAGES = \
 	libosip2 iproute2 \
 	ipset libmnl libnftnl \
 	iptables libiconv \
-	dvb-apps tvheadend
+	dvb-apps tvheadend pingd \
 
 all: $(PACKAGES)
 

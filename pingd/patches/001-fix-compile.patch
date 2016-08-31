@@ -1,0 +1,42 @@
+diff --git a/configure.ac b/configure.ac
+index 668b3c9..9f7c47e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -170,7 +170,6 @@ AC_TYPE_UID_T
+ ##
+ # Checks for library functions.
+ ##
+-AC_FUNC_MALLOC
+ AC_CHECK_FUNCS( \
+   strcpy \
+   strdup \
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 63ab3ad..62f25eb 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -10,10 +10,4 @@ endif
+ 
+ SUBDIRS = \
+ 	libcommon     \
+-	libexpat      \
+-	libnodeupdown \
+-	whatsup       \
+-	scripts       \
+-	Libnodeupdown \
+-	Nodeupdown    \
+ 	$(PINGDMAKE)
+diff --git a/src/pingd/pingd_config.c b/src/pingd/pingd_config.c
+index 7e4f874..5e762dc 100644
+--- a/src/pingd/pingd_config.c
++++ b/src/pingd/pingd_config.c
+@@ -174,10 +174,6 @@ _cb_host(conffile_t cf,
+   char *ptr;
+ 
+   assert(data);
+-
+-  /* Shorten hostname if necessary */
+-  if ((ptr = strchr(data->string, '.')))
+-    *ptr = '\0';
+   
+   if (!hostlist_push(conf.hosts, data->string))
+     ERR_EXIT(("hostlist_push: %s", strerror(errno)));
