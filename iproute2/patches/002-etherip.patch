@@ -1,5 +1,5 @@
---- include/utils.h	2016-08-08 23:58:39.000000000 +0800
-+++ include/utils.h	2016-08-24 11:29:20.646449391 +0800
+--- a/include/utils.h	2016-08-08 23:58:39.000000000 +0800
++++ b/include/utils.h	2016-08-24 11:29:20.646449391 +0800
 @@ -33,6 +33,9 @@
  #ifndef IPPROTO_AH
  #define IPPROTO_AH	51
@@ -10,8 +10,8 @@
  #ifndef IPPROTO_COMP
  #define IPPROTO_COMP	108
  #endif
---- ip/iptunnel.c	2016-08-08 23:58:39.000000000 +0800
-+++ ip/iptunnel.c	2016-08-24 11:29:27.710449206 +0800
+--- a/ip/iptunnel.c	2016-08-08 23:58:39.000000000 +0800
++++ b/ip/iptunnel.c	2016-08-24 11:29:27.710449206 +0800
 @@ -33,7 +33,7 @@
  static void usage(void)
  {

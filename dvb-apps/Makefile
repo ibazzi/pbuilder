@@ -20,9 +20,7 @@ $(SRCDIR): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(SRCDIR); mkdir -p $(SRCDIR)
 	cd $(SRCDIR); \
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE); \
-	for file in `ls ../patches/*.patch`; do \
-	(patch -p0 < $$file) \
-	done;
+	$(APPLY_PATCH)
 
 $(TARGET): $(SRCDIR)
 	VERSION_FILE=$(VERSION_FILE) $(MAKE) -C $(SRCDIR) -j$(JOBS)

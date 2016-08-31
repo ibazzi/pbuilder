@@ -1,5 +1,5 @@
---- include/linux/if_bridge.h	2016-08-08 23:58:39.000000000 +0800
-+++ include/linux/if_bridge.h	2016-08-24 11:06:38.158485106 +0800
+--- a/include/linux/if_bridge.h	2016-08-08 23:58:39.000000000 +0800
++++ b/include/linux/if_bridge.h	2016-08-24 11:06:38.158485106 +0800
 @@ -15,7 +15,6 @@
  
  #include <linux/types.h>
@@ -8,8 +8,8 @@
  
  #define SYSFS_BRIDGE_ATTR	"bridge"
  #define SYSFS_BRIDGE_FDB	"brforward"
---- include/linux/xfrm.h	2016-08-08 23:58:39.000000000 +0800
-+++ include/linux/xfrm.h	2016-08-24 11:03:47.238489586 +0800
+--- a/include/linux/xfrm.h	2016-08-08 23:58:39.000000000 +0800
++++ b/include/linux/xfrm.h	2016-08-24 11:03:47.238489586 +0800
 @@ -1,7 +1,6 @@
  #ifndef _LINUX_XFRM_H
  #define _LINUX_XFRM_H
@@ -18,8 +18,8 @@
  #include <linux/types.h>
  
  /* All of the structures in this file may not change size as they are
---- include/utils.h	2016-08-08 23:58:39.000000000 +0800
-+++ include/utils.h	2016-08-24 11:04:41.642488160 +0800
+--- a/include/utils.h	2016-08-08 23:58:39.000000000 +0800
++++ b/include/utils.h	2016-08-24 11:04:41.642488160 +0800
 @@ -209,7 +209,9 @@
  
  #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -30,8 +30,8 @@
  
  #ifndef offsetof
  # define offsetof(type, member) ((size_t) &((type *)0)->member)
---- Makefile	2016-08-08 23:58:39.000000000 +0800
-+++ Makefile	2016-08-24 11:13:25.938474417 +0800
+--- a/Makefile	2016-08-08 23:58:39.000000000 +0800
++++ b/Makefile	2016-08-24 11:13:25.938474417 +0800
 @@ -4,7 +4,7 @@
  
  PREFIX?=/usr

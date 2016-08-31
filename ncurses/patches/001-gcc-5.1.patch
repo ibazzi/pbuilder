@@ -1,5 +1,5 @@
---- ncurses/base/MKlib_gen.sh	2011-01-23 03:47:29.000000000 +0800
-+++ ncurses/base/MKlib_gen.sh	2016-08-24 19:21:08.213377919 +0800
+--- a/ncurses/base/MKlib_gen.sh	2011-01-23 03:47:29.000000000 +0800
++++ b/ncurses/base/MKlib_gen.sh	2016-08-24 19:21:08.213377919 +0800
 @@ -437,11 +437,22 @@
  	-e 's/gen_$//' \
  	-e 's/  / /g' >>$TMP

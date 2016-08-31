@@ -42,6 +42,10 @@ CFLAGS              = -DNEED_PRINTF -I$(INCLUDEDIR)
 LDFLAGS             = -L$(LIBDIR)
 BUILDFLAGS          = $(CFLAGS) $(LDFLAGS)
 
+APPLY_PATCH = for file in `ls ../patches/*.patch`; do \
+	(patch -bp1 < $$file) \
+	done
+
 ifeq ($(JOBS),)
   JOBS := $(shell grep -c ^processor /proc/cpuinfo 2>/dev/null)
   ifeq ($(JOBS),)

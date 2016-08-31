@@ -22,9 +22,7 @@ $(SRCDIR): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(SRCDIR); \
 	$(ARCHIVE_TOOL) -xf $(TARBALLS_LOCATION)/$(ARCHIVE); \
 	bld/get-version $(TARBALLS_LOCATION)/$(PACKAGE) > VERSION; \
-	for file in `ls ../patches/*.patch`; do \
-	(patch -p0 < $$file) \
-	done; \
+	$(APPLY_PATCH)
 
 $(TARGET): $(SRCDIR)
 	$(MAKE) -C $(SRCDIR) -j$(JOBS)
