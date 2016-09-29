@@ -3,19 +3,19 @@ ARCH ?= x86_64
 
 ifeq ($(ARCH), arm)
   TOOLCHAIN := @arm_toolchain@
-  CROSS_COMPILE := $(ARCH)-linux-
+  CROSS_COMPILE ?= $(ARCH)-linux-
 endif
 ifeq ($(ARCH), mips)
   TOOLCHAIN := @mips_toolchain@
-  CROSS_COMPILE := $(ARCH)-linux-
+  CROSS_COMPILE ?= $(ARCH)-linux-
 endif
 ifeq ($(ARCH), mipsel)
   TOOLCHAIN := @mipsel_toolchain@
-  CROSS_COMPILE := $(ARCH)-linux-
+  CROSS_COMPILE ?= $(ARCH)-linux-
 endif
 ifeq ($(ARCH), x86_64)
   TOOLCHAIN :=
-  CROSS_COMPILE :=
+  CROSS_COMPILE ?=
 endif
 
 PATH := $(TOOLCHAIN):$(PATH)
@@ -30,7 +30,7 @@ PREFIX              = /usr
 LIBDIR              = $(DESTDIR)$(PREFIX)/lib
 INCLUDEDIR          = $(DESTDIR)$(PREFIX)/include
 TARBALLS_LOCATION   = @use_tarballs@
-KERNEL_LOCATION     = @kernel_path@
+KERNEL_LOCATION    ?= @kernel_path@
 ARCHIVE_TOOL        = @TAR@
 ARCHIVE_TOOL_FLAGS  = --strip-components=1 -xf
 RETRIEVE_TOOL       = @CURL@
