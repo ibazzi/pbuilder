@@ -20,6 +20,7 @@ $(TARBALLS_LOCATION)/$(ARCHIVE): $(TARBALLS_LOCATION)/$(PACKAGE)
 $(SRCDIR): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(SRCDIR); mkdir -p $(SRCDIR)
 	cd $(SRCDIR) && \
+	cp -r $(TARBALLS_LOCATION)/$(PACKAGE)/.git ./; \
 	$(ARCHIVE_TOOL) -xf $(TARBALLS_LOCATION)/$(ARCHIVE)
 
 $(TARGET): $(SRCDIR)
@@ -31,6 +32,10 @@ $(TARGET): $(SRCDIR)
 	$(MAKE) -C $(SRCDIR) install
 	touch $(TARGET)
 	touch $@
+
+deb-package: $(SRCDIR)
+	cd $(SRCDIR) && \
+	dpkg-buildpackage -d -a$(ARCH)
 
 clean:
 	$(MAKE) -C $(SRCDIR) clean

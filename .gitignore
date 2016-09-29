@@ -4,3 +4,7 @@ configure
 Makefile.include
 src.*
 .installed_*
+*.dsc
+*.changes
+*.git
+*.deb
