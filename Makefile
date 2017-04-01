@@ -8,7 +8,7 @@ PACKAGES = \
 	ipset libmnl libnftnl \
 	iptables libiconv \
 	dvb-apps tvheadend pingd \
-	libev vlmcsd
+	libev vlmcsd zerotier
 
 all: $(PACKAGES)
 
